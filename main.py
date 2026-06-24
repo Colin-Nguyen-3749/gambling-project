@@ -14,7 +14,41 @@ symbol_count = {
     "D": 8
 }
 
+symbol_value = {
+    "A": 5,
+    "B": 4, 
+    "C": 3,
+    "D": 2
+}
+
+# calculate how much the user should win based on how much they bet 
+# and how many lines they got correct (three in a row)
+# This is not meant to be a fair or realistic slot machine in 
+# any way btw
+def check_winnings(columns, lines, bet, values):
+    
+    winnings = 0
+    winning_lines = []
+    
+    for line in range(lines):
+        symbol = columns[0][line]
+        for column in columns:
+            symbol_to_check = column[line]
+
+            if symbol != symbol_to_check:
+                break
+
+        # yes, this else statement is for the for loop, 
+        # not the if statement
+        else:
+            winnings += values[symbol]*bet
+            winning_lines.append(line + 1)
+
+    return winnings, winning_lines
+
+
 def get_slot_machine_spin(rows, cols, symbols):
+    
     all_symbols = []
     for symbol, symbol_count in symbols.items():
         for _ in range(symbol_count):
@@ -38,7 +72,7 @@ def get_slot_machine_spin(rows, cols, symbols):
             current_symbols.remove(value)
             column.append(value)
 
-        column.append(column)
+        columns.append(column)
     
     return columns
 
@@ -51,12 +85,10 @@ def print_slot_machine(columns):
             # prevents from printing an extra and unneeded | 
             # at the end of our slot machine display
             if i != len(columns) - 1:
-                print(col[row], "|")
+                print(col[row], end=" | ")
             else:
-                print(col[row])
-
-
-
+                print(col[row], end="")
+        print()
 
 # collects user input that gets 
 # the deposit from the user
@@ -129,7 +161,6 @@ def get_bet():
 
     return amount
 
-        
 
 def main():
     
@@ -147,5 +178,11 @@ def main():
 
     print(f"You are betting ${bet} on {lines} lines. Total bet is equal to: ${total_bet}")
     
+    slots = get_slot_machine_spin(ROWS, COLS, symbol_count)
+    print_slot_machine(slots)
+    winnings, winning_lines = check_winnings(slots, lines, bet, symbol_value)
+
+    print(f"You won: ${winnings}!")
+    print(f"You won on line(s):", *winning_lines)
 
 main()
