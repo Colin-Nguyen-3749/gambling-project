@@ -32,12 +32,31 @@ def get_slot_machine_spin(rows, cols, symbols):
         # : is the slice operator so that we can create a copy
         # instead of a reference to all_symbols
         current_symbols = all_symbols[:]
+
         for _ in range(rows):
             value = random.choice(all_symbols)
             current_symbols.remove(value)
             column.append(value)
 
         column.append(column)
+    
+    return columns
+
+# Prints and properly displays slot machine
+def print_slot_machine(columns):
+
+    for row in range(len(columns[0])):
+        for i, col in enumerate(columns):
+            
+            # prevents from printing an extra and unneeded | 
+            # at the end of our slot machine display
+            if i != len(columns) - 1:
+                print(col[row], "|")
+            else:
+                print(col[row])
+
+
+
 
 # collects user input that gets 
 # the deposit from the user
