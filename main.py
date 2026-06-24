@@ -1,3 +1,5 @@
+MAX_LINES = 3
+
 # collects user input that gets 
 # the deposit from the user
 def deposit():
@@ -30,5 +32,32 @@ def deposit():
 
     return amount
 
-deposit()
+# Ask the user the number of lines that they want to bet on 
+def get_number_of_lines():
 
+    while True:
+        lines = input("Enter the number of lines to bet on (1-" + str(MAX_LINES) + ")? ")
+
+        if lines.isdigit():
+            lines = int(lines)
+            
+            if 1 <= lines <= MAX_LINES: 
+                break
+            else:
+                print("Enter a valid number of lines")
+        else:
+            print("Please enter a number")
+
+    return lines
+
+
+
+def main():
+    
+    balance = deposit()
+    lines = get_number_of_lines()
+    
+    print(balance, lines)
+
+
+main()
