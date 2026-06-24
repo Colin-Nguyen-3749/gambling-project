@@ -1,4 +1,6 @@
 MAX_LINES = 3
+MAX_BET = 100
+MIN_BET = 1
 
 # collects user input that gets 
 # the deposit from the user
@@ -49,6 +51,8 @@ def get_number_of_lines():
             print("Please enter a number")
 
     return lines
+
+# Get the amount that the user wants to bet on each line
 
 
 
