@@ -15,9 +15,29 @@ symbol_count = {
 }
 
 def get_slot_machine_spin(rows, cols, symbols):
-    
+    all_symbols = []
+    for symbol, symbol_count in symbols.items():
+        for _ in range(symbol_count):
+            all_symbols.append(symbol)
 
+    # define column list
+    # and generate a column for every single column we have 
+    columns = []
 
+    # picks random values for each row in our column
+    for _ in range(cols):
+
+        column = []
+
+        # : is the slice operator so that we can create a copy
+        # instead of a reference to all_symbols
+        current_symbols = all_symbols[:]
+        for _ in range(rows):
+            value = random.choice(all_symbols)
+            current_symbols.remove(value)
+            column.append(value)
+
+        column.append(column)
 
 # collects user input that gets 
 # the deposit from the user
