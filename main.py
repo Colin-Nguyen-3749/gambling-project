@@ -182,6 +182,7 @@ def spin(balance):
     winnings, winning_lines = check_winnings(slots, lines, bet, symbol_value)
 
     print(f"You won: ${winnings}!")
+    # The asterisk here is called the splat operator!
     print(f"You won on line(s):", *winning_lines)
 
     return winnings - total_bet
